@@ -2,11 +2,11 @@
 
 from odoo import models, fields, api
 
-class routes(models.Model):
-    _name = 'routes.routes'
+class route(models.Model):
+    _name = 'routes.route'
 
-    date = fields.Date(string='Fecha de creación', required=True, default=fields.datetime.now())
+    date = fields.Datetime(string='Fecha de creación', required=True, default=fields.datetime.now())
     client_ids = fields.Many2many('res.partner', string='Clientes', required=True)
-    distance = fields.Char(string='Distancia recorrida', required=True)
-    duration = fields.Char(string='Duración total', required=True)
-    url = fields.Char(string='Dirección de Google Maps',required=True)
+    distance = fields.Char(string='Distancia recorrida')
+    duration = fields.Char(string='Duración total')
+    route_url = fields.Char(string='Dirección de Google Maps')
