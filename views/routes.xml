@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <!-- override original list view -->
+        <record model="ir.ui.view" id="route_tree_view">
+            <field name="name">route.tree</field>
+            <field name="model">routes.route</field>
+            <field name="arch" type="xml">
+                <tree string="Route Tree">
+                    <field name="date"/>
+                    <field name="client_ids"/>
+                    <field name="distance"/>
+                    <field name="duration"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- route creation form — select clients only -->
+        <record model="ir.ui.view" id="route_form_view">
+            <field name="name">route.form</field>
+            <field name="model">routes.route</field>
+            <field name="arch" type="xml">
+                <form string="Route Form">
+                    <sheet>
+                        <group>
+                            <field name="client_ids"/>
+                            <field name="route_url"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <!-- search bar -->        
+        <record model="ir.ui.view" id="route_search_view">
+            <field name="name">route.search</field>
+            <field name="model">routes.route</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="client_ids"/>
+                    <field name="distance"/>
+                    <field name="duration"/>
+                    <field name="date"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="route_list_action">
+            <field name="name">Rutas</field>
+            <field name="res_model">routes.route</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crear una ruta
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_routes_menu" name="Routes"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+        <menuitem id="routes_menu" name="Rutas"
+                  parent="main_routes_menu"/>
+        <!-- the following menuitem should appear *after*
+             its parent routes_menu and *after* its
+             action course_list_action -->
+        <menuitem id="route_menu" name="Ver rutas" parent="routes_menu"
+                  action="route_list_action"/>
+        <!-- Full id location:
+             action="routes.route_list_action"
+             It is not required when it is the same module -->
+
+</odoo>
